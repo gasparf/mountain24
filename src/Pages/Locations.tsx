@@ -15,7 +15,14 @@ const Locations = () => {
                 <h1 id='galleryName'>Perspective Gallery</h1>
             </div>
             <div className='disp_img'>
-
+                <div className='testing'></div>
+                <div className='testing'></div>
+                <div className='testing'></div>
+                <div className='testing'></div>
+                <div className='testing'></div>
+                <div className='testing'></div>
+                {/* just added for formatting check */}
+                {/* feel free to add onclick listener or smt */}
             </div>
         </div>
     );

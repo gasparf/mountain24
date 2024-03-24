@@ -45,8 +45,19 @@
 
 .disp_img {
     display: flex;
-    align-items: start;
-    background-color: gray;
+    flex-wrap: wrap;
+    background-color: white;
     height: 100%;
     padding: 4%;
+    /* idk why the vertical spacing between the flex items are so wierd */
+    /* might be something to do with some of the default settings set up by react or tailwind idk */
+}
+
+.testing{
+    display: block;
+    height: 14vw;
+    width: 20vw;
+    background-color: grey;
+    margin: 3px;
+    /* maybe no margin, see what looks better */
 }
