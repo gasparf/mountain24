@@ -1,10 +1,13 @@
 import React from 'react';
+import { useContext, useState } from 'react';
 
-export default function Locations(){
-    return(
-        <div>
-            
+const Locations = () => {
+
+
+    return (
+        <div className='test'>
+
         </div>
     )
-
-}
+};
+export default Locations;

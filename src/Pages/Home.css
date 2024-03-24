@@ -1,0 +1,27 @@
+.Home {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    /* left: 0; */
+}
+.map {
+    background-color: aquamarine;
+    display: block;
+    height: 800px;
+    width: 800px;
+    overflow: hidden;
+
+}
+
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+* {
+    box-sizing: border-box;
+}
