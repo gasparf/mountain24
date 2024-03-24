@@ -1,8 +1,8 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
-import fireConfig from './firebase_config.json'
-// import firebase from 'firebase/app';
-import db from  "./FirebaseConfig"
+import firebase from 'firebase/app';
+import db, {storage} from  "./FirebaseConfig"
 import {doc, setDoc} from 'firebase/firestore';
+import store, { UploadResult, ref,uploadBytes } from "firebase/storage";
 
 
 interface FormData {
@@ -30,6 +30,7 @@ enum Times {
 }
 
 const UploadMenu = () => {
+
     const [formData, setFormData] = useState<FormData>({
         direction: 'North',
         locationName: '',
@@ -42,11 +43,28 @@ const UploadMenu = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        
+        if(!formData.photo){
+            return;
+        }
+        const imgRef = ref(storage, 'images/' + formData.locationName + '.jpg');
+
+        let fileUrl = "";
+
         try {
+            await uploadBytes(imgRef, formData.photo).then((snapshot : UploadResult) => {
+                console.log('upload success!');
+                fileUrl = snapshot.ref.fullPath
+            });
+        } catch (e) {
+            console.log(e)
+        }
+
+        try {
+
             await setDoc(doc(db, 'Locations', 'testLocation', 'locationEntries', formData.locationName), {
                 direction: formData.direction,
-                imageReference: "filler",
-                imageFile: formData.photo,
+                imageReference: fileUrl,
                 latitude: formData.lat,
                 longitude: formData.lon,
                 season: formData.season,
@@ -57,23 +75,22 @@ const UploadMenu = () => {
         } catch (error) {
             console.error('Error:', error); 
         }
-        return
     };
 
     //not taking into consideration for the file upload
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         
         const {name, value} = e.target;
-
-        if(e.target.name === 'fileUpload'){
-            const ev = e as ChangeEvent<HTMLInputElement>;
-            if(ev.target.files){
-                setFormData({...formData, [name]:ev.target.files[0]});
-            }
-        } else {
-            setFormData({...formData, [name]:e.target.value})
-        }
+        setFormData({...formData, [name]:e.target.value})
     };
+
+    const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+        if(!e.target.files){
+            return
+        }
+        const name = e.target.name
+        setFormData({...formData, [name]:e.target.files[0]});
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -92,8 +109,8 @@ const UploadMenu = () => {
                 <input
                     type="file"
                     name="photo"
-                    onChange={handleChange}
-                    accept=".jpg, .jpeg, .png"
+                    onChange={handleFileUpload}
+                    accept=".jpg"
                     required
                 />
             </div>
@@ -142,6 +159,7 @@ const UploadMenu = () => {
             <br />
             <button type="submit">Submit</button>
         </form>
+        
     )
 };
 export default UploadMenu;

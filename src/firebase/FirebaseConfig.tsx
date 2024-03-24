@@ -1,6 +1,7 @@
 import jsonData from "./firebase_config.json";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: jsonData.apiKey,
@@ -14,5 +15,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+
+
+export const storage = getStorage();
 
 export default db;
