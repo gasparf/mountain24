@@ -1,5 +1,36 @@
-.menu-bars {
-    display: absolute;
-    font-size: 2rem;
-    z-index: 0;
+.appear {
+    background-color: transparent;
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    z-index: 400;
 }
+.menu-bars {
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
+  }
+
+.nav-menu {
+    background-color: transparent;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 6.5%;
+    left: -100%;
+    transition: 850ms;
+    z-index: 100;
+}
+
+.nav-menu.active {
+    background-color: transparent;
+    left: 18%;
+    transition: 350ms;
+    z-index: 100;
+}
+

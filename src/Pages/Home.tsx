@@ -7,6 +7,7 @@ import "leaflet/dist/leaflet.css"
 import { Icon } from 'leaflet'
 import markeer from '../Assets/marker-icon.png'
 import NavMenu from '../Components/NavMenu'
+import PopUpCard from '../Components/PopUp'
 
 const Home = () => {
 
@@ -21,13 +22,6 @@ const Home = () => {
         <div className='Home'>
 
             <div className='map'>
-
-                <div className='menu'>
-                    
-                    <NavMenu />
-                
-                </div>
-
                 <MapContainer 
                 
                 center={[49.2, -123]} zoom={11} scrollWheelZoom={false} 
@@ -40,11 +34,18 @@ const Home = () => {
                 />
                     <Marker position={[49.2787246, -122.9181736]} icon={customIcon}>
                         <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
+                            <div className="popup"> 
+                                <PopUpCard />
+                            </div>
                         </Popup>
                     </Marker>
                 </MapContainer>
 
+            </div>
+            <div className='menu'>
+                    
+                    <NavMenu />
+            
             </div>
             
         </div>

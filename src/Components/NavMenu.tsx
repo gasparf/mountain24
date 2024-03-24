@@ -1,7 +1,7 @@
 import React, { useState } from  'react';
 
 import {IoMenuOutline} from 'react-icons/io5';
-
+import {IoClose} from 'react-icons/io5';
 
 import { BiSolidDownArrow } from "react-icons/bi";
 import { RxEnterFullScreen } from "react-icons/rx";
@@ -22,7 +22,7 @@ const NavMenu = () => {
     
     return (
         <>
-            <IconContext.Provider value={{color: 'white'}}>
+            <IconContext.Provider value={{color: '#fff'}}>
                 <div className='appear'>
                     <Link to="#" className = 'menu-bars'> 
                         <IoMenuOutline onClick={handleAppear}/>

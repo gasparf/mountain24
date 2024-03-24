@@ -1,0 +1,22 @@
+.main {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.banner {
+    display: flexbox;
+    justify-content: start;
+    background-color: blue;
+    height: 33%;
+    width: 100%;
+}
+
+.disp_img {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    height: 100%;
+}

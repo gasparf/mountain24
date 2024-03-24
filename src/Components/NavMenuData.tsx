@@ -1,19 +1,20 @@
 import React from 'react';
-import {IoMenuOutline} from 'react-icons/io5';
-
+import { IoMdHome } from 'react-icons/io';
 import { FaUser } from "react-icons/fa";
+import Locations from '../Pages/Locations';
+
 
 export const NavMenuData = [
     {
         title: 'Home',
         path: '/',
-        icon: <IoMenuOutline />,
+        icon: <IoMdHome />,
         cName: 'nav-text'
     },
 
     {
         title: 'Locations',
-        path: '/locations',
+        path: '/Locations',
         icon: <FaUser />,
         cName: 'nav-text'
     }

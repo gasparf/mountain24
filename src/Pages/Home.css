@@ -14,7 +14,7 @@
     display: block;
     height: 90%;
     width: 95%;
-    overflow: hidden;
+    z-index: 0;
 
 }
 
@@ -23,12 +23,23 @@
     width: 100%;
 }
 
+
 .menu {
     position: absolute;
     display: flexbox;
     top: 6.5%;
-    left: 9%;
+    left: 8%;
     z-index: 0;
+    
+}
+
+.popup {
+    display:flex;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 * {
