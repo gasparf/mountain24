@@ -3,7 +3,7 @@ import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
-
+import UploadMenu from '../firebase/UploadMenu';
 
 const Locations = () => {
     return (
@@ -13,7 +13,7 @@ const Locations = () => {
 
             </div>
             <div className='disp_img'>
-
+                <UploadMenu/>
             </div>
         </div>
     );

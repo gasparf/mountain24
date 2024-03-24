@@ -1,9 +1,12 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import fireConfig from './firebase_config.json'
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+// import firebase from 'firebase/app';
+import db from  "./FirebaseConfig"
+import {doc, setDoc} from 'firebase/firestore';
+
 
 interface FormData {
+    direction: string;
     locationName: string;
     photo: File | null;
     lat: number;
@@ -28,6 +31,7 @@ enum Times {
 
 const UploadMenu = () => {
     const [formData, setFormData] = useState<FormData>({
+        direction: 'North',
         locationName: '',
         photo: null,
         lat: 49.2787246,
@@ -36,28 +40,23 @@ const UploadMenu = () => {
         time: Times.Morning
     })
 
-    firebase.initializeApp(fireConfig);
-
-    // const db = firebase.firestore();
-
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        // e.preventDefault();
-        // try {
-        //     const response = await fetch('api-endpoint', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(formData),
-        //     });
-        //     if (response.ok) {
-        //         console.log(response.ok);
-        //     } else {
-        //         console.error('Failure!');
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error); 
-        // }
+        e.preventDefault();
+        try {
+            await setDoc(doc(db, 'Locations', 'testLocation', 'locationEntries', formData.locationName), {
+                direction: formData.direction,
+                imageReference: "filler",
+                imageFile: formData.photo,
+                latitude: formData.lat,
+                longitude: formData.lon,
+                season: formData.season,
+                time: formData.time
+            })
+            // clean out form data? setFormData('')
+            console.log('success!!')
+        } catch (error) {
+            console.error('Error:', error); 
+        }
         return
     };
 
