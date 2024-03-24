@@ -35,7 +35,7 @@
 
 .popup {
     display:flex;
-    background-color: black;
+    background-color: transparent;
     justify-content: center;
     align-items: center;
     height: 100%;

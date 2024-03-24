@@ -1,20 +1,26 @@
 .popup-inner {
-    position: absolute;
+    display: grid;
     height: 100%;
     width: 100%;
-}
+    justify-content: space-evenly;
 
+}
+.upload {
+    display: flex;
+    height: 200px;
+}
 .img-upload-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    width: 100%;
 }
 
-.button-container {
+.button-containers {
     display: flex;
-    justify-content: space-evenly;
+    position: relative;
+    justify-content: space-between;
     align-items: center;
-    height: 10%;
 
 }
+
