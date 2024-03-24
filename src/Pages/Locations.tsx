@@ -1,5 +1,4 @@
 import React from 'react';
-import { useContext, useState } from 'react';
 import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
@@ -14,7 +13,7 @@ const Locations = () => {
 
             </div>
             <div className='disp_img'>
-                
+
             </div>
         </div>
     );

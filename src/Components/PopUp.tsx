@@ -1,9 +1,17 @@
 import React from 'react';
+import SubmitButton from './Buttons/SubmitButton';
+import CancelButton from './Buttons/CancelButton';
 
 const PopUp = () => {
     return (
         <div className='popup-inner'>
-            <p> asd;lfjas;lkjdf;laskdfj;lkasddjfl;kajsfl;kjasl;dkfja;lks </p>
+            <div className='img-upload-box'>
+                <input type='file'/>
+            </div>
+            <div className='button-containers'>
+                <SubmitButton />
+                <CancelButton />
+            </div>
         </div>
     );
 };

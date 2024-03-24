@@ -1,6 +1,20 @@
 .popup-inner {
-    background-color: gray;
     position: absolute;
     height: 100%;
     width: 100%;
+}
+
+.img-upload-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10%;
+
 }
