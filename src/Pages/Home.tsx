@@ -6,6 +6,7 @@ import { Marker, Popup } from 'react-leaflet'
 import "leaflet/dist/leaflet.css"
 import { Icon } from 'leaflet'
 import markeer from '../Assets/marker-icon.png'
+import NavMenu from '../Components/NavMenu'
 
 const Home = () => {
 
@@ -18,7 +19,14 @@ const Home = () => {
     })
     return (
         <div className='Home'>
+
             <div className='map'>
+
+                <div className='menu'>
+                    
+                    <NavMenu />
+                
+                </div>
 
                 <MapContainer 
                 
