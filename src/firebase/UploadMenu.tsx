@@ -1,11 +1,8 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
-import firebase from 'firebase/app';
-import db, {storage} from  "./FirebaseConfig";
-import {doc, setDoc} from 'firebase/firestore';
-import store, { UploadResult, ref,uploadBytes } from "firebase/storage";
+import {dataSubmission} from  "./FirebaseManager";
 
 
-interface FormData {
+export interface FormData {
     direction: string;
     locationName: string;
     photo: File | null;
@@ -43,38 +40,8 @@ const UploadMenu = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        if(!formData.photo){
-            return;
-        }
-        const imgRef = ref(storage, 'images/' + formData.locationName + '.jpg');
 
-        let fileUrl = "";
-
-        try {
-            await uploadBytes(imgRef, formData.photo).then((snapshot : UploadResult) => {
-                console.log('upload success!');
-                fileUrl = snapshot.ref.fullPath
-            });
-        } catch (e) {
-            console.log(e)
-        }
-
-        try {
-
-            await setDoc(doc(db, 'Locations', 'testLocation', 'locationEntries', formData.locationName), {
-                direction: formData.direction,
-                imageReference: fileUrl,
-                latitude: formData.lat,
-                longitude: formData.lon,
-                season: formData.season,
-                time: formData.time
-            })
-            // clean out form data? setFormData('')
-            console.log('success!!')
-        } catch (error) {
-            console.error('Error:', error); 
-        }
+        dataSubmission(formData);
     };
 
     //not taking into consideration for the file upload

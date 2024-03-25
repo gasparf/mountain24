@@ -5,7 +5,7 @@ import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
 import UploadMenu from '../firebase/UploadMenu';
 import {ref, getDownloadURL} from "firebase/storage";
-import {storage} from "../firebase/FirebaseConfig";
+import {storage} from "../firebase/FirebaseManager";
 
 const Locations = () => {
 
