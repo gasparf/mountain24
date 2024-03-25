@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
 import placeHolderImg from '../Assets/placeholder.jpg';
+import { collection, getDocs } from 'firebase/firestore';
+import { imgDB } from '../firebase/index';
 
 const Locations = () => {
+    const [data, setData] = useState([]);
+    const getData = async () => {
+        const valRef = collection(imgDB, 'images');
+        const dataDB = await getDocs(valRef);
+        
+        console.log(dataDB);
+    }  
+    
+    useEffect(() => {
+
+    
+    })
     return (
         <div className='main'>
             <NavMenu />
@@ -25,6 +39,7 @@ const Locations = () => {
                 {/* feel free to add onclick listener or smt */}
             </div>
         </div>
+        
     );
 };
 export default Locations;
