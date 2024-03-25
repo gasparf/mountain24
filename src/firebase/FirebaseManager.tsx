@@ -89,12 +89,12 @@ export const dataSubmission = async (info : FormData) => {
 }
 
 //method for url retrieval to access images
-export const getImgURL = (url: string) : string => {
+export const getImgURL = async (url: string) => {
     const reference = ref(storage, url);
 
     let accessURL = "";
 
-    getDownloadURL(reference).then((data) => {
+    await getDownloadURL(reference).then((data) => {
         accessURL = data;
     }).catch((e) => {
         console.error("download url for " + url + "retrieval error!");

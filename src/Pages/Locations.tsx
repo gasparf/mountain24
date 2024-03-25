@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
@@ -10,8 +10,13 @@ const Locations = () => {
 
     const [imgURL, setURL] = useState<string | null>(null);
 
-    setURL(getImgURL('ASBuilding.jpg'));
-    
+    const setup = async () => {
+        const url = await getImgURL('ASBuilding.jpg');
+        setURL(url);
+    }
+
+    setup();
+
     return (
         <div className='main'>
             <NavMenu />
