@@ -1,6 +1,6 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import firebase from 'firebase/app';
-import db, {storage} from  "./FirebaseConfig"
+import db, {storage} from  "./FirebaseConfig";
 import {doc, setDoc} from 'firebase/firestore';
 import store, { UploadResult, ref,uploadBytes } from "firebase/storage";
 
