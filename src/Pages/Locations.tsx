@@ -4,20 +4,13 @@ import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
 import UploadMenu from '../firebase/UploadMenu';
-import {ref, getDownloadURL} from "firebase/storage";
-import {storage} from "../firebase/FirebaseManager";
+import { getImgURL } from '../firebase/FirebaseManager';
 
 const Locations = () => {
 
     const [imgURL, setURL] = useState<string | null>(null);
 
-    const imRef = ref(storage, 'ASBuilding.jpg');
-
-    getDownloadURL(imRef).then((url) => {
-        setURL(url);
-    }).catch((e) => {
-        console.error("download url retrieval error");
-    })
+    setURL(getImgURL('ASBuilding.jpg'));
     
     return (
         <div className='main'>

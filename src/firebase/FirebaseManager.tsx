@@ -1,7 +1,7 @@
 import jsonData from "./firebase_config.json";
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, doc, getDoc, collection, getCountFromServer } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FormData } from "./UploadMenu";
 
 
@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const store = getFirestore();
 
-export const storage = getStorage();
+const storage = getStorage();
 
 const imgDirectory = "images/";
 const imgDataType = ".jpg";
@@ -86,4 +86,19 @@ export const dataSubmission = async (info : FormData) => {
     } catch (e) {
         console.error("data upload error!");
     }
+}
+
+//method for url retrieval to access images
+export const getImgURL = (url: string) : string => {
+    const reference = ref(storage, url);
+
+    let accessURL = "";
+
+    getDownloadURL(reference).then((data) => {
+        accessURL = data;
+    }).catch((e) => {
+        console.error("download url for " + url + "retrieval error!");
+    });
+
+    return accessURL;
 }
