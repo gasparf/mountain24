@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
-import placeHolderImg from '../Assets/placeholder.jpg';
-import { collection, getDocs } from 'firebase/firestore';
-import { imgDB } from '../firebase/index';
+import UploadMenu from '../firebase/UploadMenu';
+import { getImgURL } from '../firebase/FirebaseManager';
 
 const Locations = () => {
-    const [data, setData] = useState([]);
-    const getData = async () => {
-        const valRef = collection(imgDB, 'images');
-        const dataDB = await getDocs(valRef);
-        
-        console.log(dataDB);
-    }  
-    
-    useEffect(() => {
 
-    
-    })
+    const [imgURL, setURL] = useState<string | null>(null);
+
+    const setup = async () => {
+        const url = await getImgURL('ASBuilding.jpg');
+        setURL(url);
+    }
+
+    setup();
+
     return (
         <div className='main'>
             <NavMenu />
@@ -29,14 +26,8 @@ const Locations = () => {
                 <h1 id='galleryName'>Perspective Gallery</h1>
             </div>
             <div className='disp_img'>
-                <div className='testing'></div>
-                <div className='testing'></div>
-                <div className='testing'></div>
-                <div className='testing'></div>
-                <div className='testing'></div>
-                <div className='testing'></div>
-                {/* just added for formatting check */}
-                {/* feel free to add onclick listener or smt */}
+                <UploadMenu/>
+                <img src={imgURL ? imgURL : ''} className='test'/>
             </div>
         </div>
         
