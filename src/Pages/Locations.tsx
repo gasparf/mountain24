@@ -5,6 +5,7 @@ import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
 import UploadMenu from '../firebase/UploadMenu';
 import { getImgURL } from '../firebase/FirebaseManager';
+import placeHolderImg from '../Assets/placeholder.jpg';
 
 const Locations = () => {
 
