@@ -9,10 +9,13 @@ import markeer from '../Assets/marker-icon.png'
 import NavMenu from '../Components/NavMenu'
 import PopUpCard from '../Components/PopUp'
 import { getExploreData, SnapshotInfo } from '../firebase/FirebaseManager';
+import { MdArrowDropDown, MdFullscreen } from "react-icons/md";
+import { IconContext } from 'react-icons';
 
 const Home = () => {
 
     const [exploreData, setExploreData] = useState<SnapshotInfo[]>([]);
+    const [exploreToggle, setExplore] = useState(false);
 
     const customIcon = new Icon({
         iconUrl: markeer,
@@ -35,11 +38,20 @@ const Home = () => {
         exploreDataInit();
     }, [])
 
+    const toggleExplore = () => {
+        if(!exploreToggle){
+            document.getElementById('exploreSection')?.scrollIntoView({behavior: 'smooth'});
+        }else{
+            document.getElementById('map')?.scrollIntoView({behavior: "smooth"});
+        }
+        setExplore(exploreToggle => !exploreToggle);
+    }
+
     return (
         <>
             <div className='Home'>
 
-            <div className='map'>
+            <div className='map' id="map">
                 <MapContainer 
                 
                 center={[49.2, -123]} zoom={11} scrollWheelZoom={true} 
@@ -65,7 +77,14 @@ const Home = () => {
                     <NavMenu />
 
             </div>
-
+            <IconContext.Provider value={{color: '#fff'}}>
+                {
+                    !exploreToggle && (<MdArrowDropDown id="exploreToggle" onClick={toggleExplore}/>)
+                }
+                {
+                    exploreToggle && (<MdFullscreen id="exploreToggle" onClick={toggleExplore}/>)
+                }
+            </IconContext.Provider>
 
 
             </div>
