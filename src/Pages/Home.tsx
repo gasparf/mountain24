@@ -34,6 +34,15 @@ const Home = () => {
                 console.log(e);
             }
         }
+
+        document.addEventListener("scroll", () => {
+            if(!exploreToggle){
+                setExplore(true);
+            }
+            if(window.scrollY == 0){
+                setExplore(false);
+            }
+        })
         
         exploreDataInit();
     }, [])
