@@ -1,16 +1,5 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
-import {dataSubmission} from  "./FirebaseManager";
-
-
-export interface FormData {
-    direction: string;
-    locationName: string;
-    photo: File | null;
-    lat: number;
-    lon: number;
-    season: string;
-    time: string;
-}
+import {dataSubmission, SnapshotInfo} from  "./FirebaseManager";
 
 enum Seasons {
     Spring = 'Spring',
@@ -28,7 +17,7 @@ enum Times {
 
 const UploadMenu = () => {
 
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<SnapshotInfo>({
         direction: 'North',
         locationName: '',
         photo: null,

@@ -1,8 +1,7 @@
 import jsonData from "./firebase_config.json";
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, doc, getDoc, collection, getCountFromServer } from "firebase/firestore";
+import { getFirestore, setDoc, doc, getDoc, collection, getCountFromServer, getDocsFromServer, query, CollectionReference, DocumentData} from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { FormData } from "./UploadMenu";
 
 
 const firebaseConfig = {
@@ -23,7 +22,17 @@ const storage = getStorage();
 const imgDirectory = "images/";
 const imgDataType = ".jpg";
 
-export const dataSubmission = async (info : FormData) => {
+export interface SnapshotInfo {
+    direction: string;
+    locationName: string;
+    photo: File | string | null;
+    lat: number;
+    lon: number;
+    season: string;
+    time: string;
+}
+
+export const dataSubmission = async (info : SnapshotInfo) => {
 
     if(!info.photo)
     {
@@ -60,7 +69,7 @@ export const dataSubmission = async (info : FormData) => {
 
     //image upload to firebase storage
     try {
-        await uploadBytes(imgRef, info.photo).then((snapshot) => {
+        await uploadBytes(imgRef, info.photo as File).then((snapshot) => {
             console.log("image upload success!");
             fileUrl = snapshot.ref.fullPath;
         })
@@ -70,6 +79,7 @@ export const dataSubmission = async (info : FormData) => {
         console.error("image upload error!");
     }
     
+    fileUrl = await(getImgURL(fileUrl));
 
     //data upload to firebase database
     try{
@@ -101,4 +111,87 @@ export const getImgURL = async (url: string) => {
     });
 
     return accessURL;
+}
+
+export const getInfo = async () => {
+    const snap = await getCountFromServer(collection(store, 'Locations'));
+    const id = snap.data().count.toString();
+    console.log(id)
+}
+
+export const getCollectionDocs = async (collectionRef : CollectionReference) => {
+
+    let q = query(collectionRef );
+
+    const locations = await getDocsFromServer(q);
+    
+    let docs : DocumentData[] = [];
+    
+    locations.forEach((doc) => {
+        docs.push(doc);
+    })
+
+    return docs;
+}
+
+export const getCollectionInfo = async (collectionRef : string) => {
+    const docs = await getCollectionDocs(collection(store, "Locations", collectionRef, "locationEntries"));
+
+    let info : SnapshotInfo[] = [];
+
+    docs.forEach( async (dInfo) => {
+        info.push(docToLoc(dInfo, collectionRef));
+    })
+
+    return info;
+}
+
+const docToLoc = (doc : DocumentData, name : string) : SnapshotInfo => {
+    const data = doc.data();
+    const translation : SnapshotInfo = {
+        direction: data['direction'],
+        locationName: name,
+        photo: data['imageReference'],
+        lat: data['latitude'],
+        lon: data['longitude'],
+        season: data['season'],
+        time: data['time']
+    };
+    return translation;
+}
+
+export const getExploreData = async () => {
+    
+    const locations = await getCollectionDocs(collection(store, 'Locations'));
+
+    const info = locations.map( async (docInfo) => {
+        const docRef = doc(store, "Locations", docInfo.id, "locationEntries", "entry");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            return docToLoc(docSnap, docInfo.id);
+            // console.log(docToLoc(docSnap));
+        }else{
+            return null
+        }
+    })
+    const docs = await Promise.all(info)
+
+    // basically gets all the location data possible and returns it
+    // vvvvvvvv
+
+    // const t = await Promise.all(docs);
+    // const out = t.filter((d) => d != null);
+
+    // const docs = locations.map(async element => {
+    //     const info = await getCollectionInfo(element.id);
+    //     return info
+    // });
+
+    // const out = await Promise.all(docs);
+
+    // return out.flat()
+
+    return docs.filter(element => element != null) as SnapshotInfo[];
+    
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css'
 import L from 'leaflet'
 import { MapContainer, TileLayer} from 'react-leaflet'
@@ -8,8 +8,11 @@ import { Icon } from 'leaflet'
 import markeer from '../Assets/marker-icon.png'
 import NavMenu from '../Components/NavMenu'
 import PopUpCard from '../Components/PopUp'
+import { getExploreData, SnapshotInfo } from '../firebase/FirebaseManager';
 
 const Home = () => {
+
+    const [exploreData, setExploreData] = useState<SnapshotInfo[]>([]);
 
     const customIcon = new Icon({
         iconUrl: markeer,
@@ -18,8 +21,23 @@ const Home = () => {
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     })
+
+    useEffect(() => {
+        const exploreDataInit = async () => {
+            try{
+                const test = await getExploreData()
+                setExploreData(test)
+            } catch(e) {
+                console.log(e)
+            }
+        }
+        
+        exploreDataInit();
+    }, [])
+
     return (
-        <div className='Home'>
+        <>
+            <div className='Home'>
 
             <div className='map'>
                 <MapContainer 
@@ -45,10 +63,21 @@ const Home = () => {
             <div className='menu'>
                     
                     <NavMenu />
-            
+
             </div>
-            
-        </div>
+
+
+
+            </div>
+            <div id='exploreSection'>
+                {
+                    exploreData.map((loc) => (
+                        <img src={loc.photo as string} className='panel'></img>
+                    ))
+                }
+            </div>
+        </>
+        
     )
 }; 
 export default Home;
