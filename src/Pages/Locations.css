@@ -54,3 +54,17 @@
     width: 200px;
     height: 200px;
 }
+
+#stitch{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+}
+
+.panoImg{
+    width: 400px;
+    height: 300px;
+    position: relative;
+    object-fit: cover;
+}

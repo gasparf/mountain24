@@ -25,10 +25,10 @@ const Home = () => {
     useEffect(() => {
         const exploreDataInit = async () => {
             try{
-                const test = await getExploreData()
-                setExploreData(test)
+                const data = await getExploreData();
+                setExploreData(data);
             } catch(e) {
-                console.log(e)
+                console.log(e);
             }
         }
         
