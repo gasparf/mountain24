@@ -6,18 +6,47 @@
 }
 
 .banner {
-    display: flexbox;
     justify-content: start;
     background-color: blue;
-    height: 33%;
+    height: 45%;
     width: 100%;
+    overflow: hidden;
+}
+
+.banner #bannerImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0% 45%;
+}
+
+.placeHolder{
+    align-items: baseline;
+    object-position: top;
+}
+
+#bannerTint{
+    height: 100%;
+    width: 100%;
+    background-color: #00000088;
+    position: relative;
+    top: -101.5%;
+    left: 0;
+}
+
+#galleryName{
+    position: relative;
+    top: -125%;
+    padding-left: 80px;
+    color: white;
+    font-weight: 600;
+    font-size: 2.75rem;
 }
 
 .disp_img {
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-    background-color: gray;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
     height: 100%;
 }
 

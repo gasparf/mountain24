@@ -33,23 +33,18 @@ const NavMenu = () => {
 
             <IconContext.Provider value={{ color: "#fff" }}>
         <nav className={appear ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items" onClick={handleAppear}>
-            <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <IoClose />
-              </Link>
-            </li>
+          <div className="nav-menu-items">
             {NavMenuData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <div key={index} className={"option" + index + " btn"}>
                   <Link to={item.path}>
                     {item.icon}
-                    <span className="navbar-title">{item.title}</span>
+                    {/* <span className="navbar-title">{item.title}</span> */}
                   </Link>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </nav>
       </IconContext.Provider>
         </>

@@ -24,7 +24,7 @@ const Home = () => {
             <div className='map'>
                 <MapContainer 
                 
-                center={[49.2, -123]} zoom={11} scrollWheelZoom={false} 
+                center={[49.2, -123]} zoom={11} scrollWheelZoom={true} 
                 
                 >
                 

@@ -5,6 +5,7 @@ import Card from '../Components/Card/Card';
 import NavMenu from '../Components/NavMenu';
 import UploadMenu from '../firebase/UploadMenu';
 import { getImgURL } from '../firebase/FirebaseManager';
+import placeHolderImg from '../Assets/placeholder.jpg';
 
 const Locations = () => {
 
@@ -20,14 +21,17 @@ const Locations = () => {
     return (
         <div className='main'>
             <NavMenu />
-            <div className='banner'> 
-
+            <div className='banner'>
+                <img className='placeHolder' id="bannerImg" src={placeHolderImg}/>
+                <div id='bannerTint'></div>
+                <h1 id='galleryName'>Perspective Gallery</h1>
             </div>
             <div className='disp_img'>
                 <UploadMenu/>
                 <img src={imgURL ? imgURL : ''} className='test'/>
             </div>
         </div>
+        
     );
 };
 export default Locations;
