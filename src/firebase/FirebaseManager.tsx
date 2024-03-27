@@ -5,6 +5,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FormData } from "./UploadMenu";
 
 
+
 const firebaseConfig = {
     apiKey: jsonData.apiKey,
     authDomain: jsonData.authDomain,
@@ -102,3 +103,7 @@ export const getImgURL = async (url: string) => {
 
     return accessURL;
 }
+
+
+// Login functions & variables
+
