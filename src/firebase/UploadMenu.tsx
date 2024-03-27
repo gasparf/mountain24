@@ -1,6 +1,17 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import {dataSubmission, SnapshotInfo} from  "./FirebaseManager";
 
+enum Direction {
+    North = 'North',
+    NorthEast = 'NorthEast',
+    East = 'East',
+    SouthEast = 'SouthEast',
+    South = 'South',
+    SouthWest = 'SouthWest',
+    West = 'West',
+    NorthWest = 'NorthWest',
+}
+
 enum Seasons {
     Spring = 'Spring',
     Summer = 'Summer',
@@ -18,7 +29,7 @@ enum Times {
 const UploadMenu = () => {
 
     const [formData, setFormData] = useState<SnapshotInfo>({
-        direction: 'North',
+        direction: Direction.North,
         locationName: '',
         photo: null,
         lat: 49.2787246,
@@ -94,23 +105,36 @@ const UploadMenu = () => {
             </label>
             <br/>
             <label>
+                Direction:
+            </label>
+            <select id="seasonSelect" name="season" value={formData.season} onChange={handleChange}>
+                {
+                    Object.keys(Direction).map((dir) => (
+                        <option value={Direction[dir as keyof typeof Direction]}>{Direction[dir as keyof typeof Direction]}</option>
+                    ))
+                }
+            </select>
+            <br/>
+            <label>
                 Season:
             </label>
             <select id="seasonSelect" name="season" value={formData.season} onChange={handleChange}>
-                <option value={Seasons.Spring}>{Seasons.Spring}</option>
-                <option value={Seasons.Summer}>{Seasons.Summer}</option>
-                <option value={Seasons.Autumn}>{Seasons.Autumn}</option>
-                <option value={Seasons.Winter}>{Seasons.Winter}</option>
+                {
+                    Object.keys(Seasons).map((season) => (
+                        <option value={Seasons[season as keyof typeof Seasons]}>{Seasons[season as keyof typeof Seasons]}</option>
+                    ))
+                }
             </select>
             <br/>
             <label>
                 Time:
             </label>
             <select id="timeSelect" name="time" value={formData.time} onChange={handleChange}>
-                <option value={Times.Morning}>{Times.Morning}</option>
-                <option value={Times.Noon}>{Times.Noon}</option>
-                <option value={Times.Evening}>{Times.Evening}</option>
-                <option value={Times.Night}>{Times.Night}</option>
+                {
+                    Object.keys(Times).map((time) => (
+                        <option value={Times[time as keyof typeof Times]}>{Times[time as keyof typeof Times]}</option>
+                    ))
+                }
             </select>
             <br />
             <button type="submit">Submit</button>
