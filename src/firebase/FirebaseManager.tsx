@@ -172,7 +172,13 @@ export const getExploreData = async () => {
     const locations = await getCollectionDocs(collection(store, 'Locations'));
 
     const info = locations.map( async (docInfo) => {
-        const docRef = doc(store, "Locations", docInfo.id, "locationEntries", "entry");
+        
+        const stash = collection(store, 'Locations', docInfo.id, 'locationEntries')
+        const snap = await getCountFromServer(stash);
+        let id = Math.floor(Math.random() * snap.data().count).toString();
+        id = id == '0' ? '' : id;
+        
+        const docRef = doc(store, "Locations", docInfo.id, "locationEntries", "entry" + id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
