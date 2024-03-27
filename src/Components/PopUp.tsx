@@ -5,7 +5,6 @@ import './PopUp.css';
 
 
 
-
 const PopUp = () => {
 
     var theFile = document.getElementById('file');
@@ -28,6 +27,7 @@ const PopUp = () => {
                     <CancelButton />
                     <SubmitButton />
             </div>
+
         </div>
     );
 };

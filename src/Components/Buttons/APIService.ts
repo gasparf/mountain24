@@ -15,4 +15,5 @@ export default class APIService{
 	.catch(error => console.log(error))
 	}
 
-}
+} 
+

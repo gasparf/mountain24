@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Locations.css';
 import CardContainer from '../Components/CardContainer/CardContainer';
 import Card from '../Components/Card/Card';
-import NavMenu from '../Components/NavMenu';
+import NavMenu from '../Components/NavMenu/NavMenu';
 import UploadMenu from '../firebase/UploadMenu';
 import { getImgURL } from '../firebase/FirebaseManager';
 import placeHolderImg from '../Assets/placeholder.jpg';

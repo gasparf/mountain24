@@ -1,7 +1,8 @@
 import React from 'react';
 import { IoMdHome } from 'react-icons/io';
 import { FaUser } from "react-icons/fa";
-import Locations from '../Pages/Locations';
+import { LuTextCursorInput } from "react-icons/lu";
+import Locations from '../../Pages/Locations';
 
 
 export const NavMenuData = [
@@ -16,6 +17,13 @@ export const NavMenuData = [
         title: 'Locations',
         path: '/Locations',
         icon: <FaUser />,
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'Entries',
+        path: '/Entries',
+        icon: <LuTextCursorInput />,
         cName: 'nav-text'
     }
 ]
