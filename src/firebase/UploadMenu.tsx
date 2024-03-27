@@ -1,5 +1,5 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
-import {dataSubmission, SnapshotInfo} from  "./FirebaseManager";
+import {dataSubmission, SnapshotForm} from  "./FirebaseManager";
 
 enum Direction {
     North = 'North',
@@ -28,7 +28,7 @@ enum Times {
 
 const UploadMenu = () => {
 
-    const [formData, setFormData] = useState<SnapshotInfo>({
+    const [formData, setFormData] = useState<SnapshotForm>({
         direction: Direction.North,
         locationName: '',
         photo: null,

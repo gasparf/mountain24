@@ -22,17 +22,24 @@ const storage = getStorage();
 const imgDirectory = "images/";
 const imgDataType = ".jpg";
 
-export interface SnapshotInfo {
+interface SnapshotProperties {
     direction: string;
     locationName: string;
-    photo: File | string | null;
     lat: number;
     lon: number;
     season: string;
     time: string;
 }
 
-export const dataSubmission = async (info : SnapshotInfo) => {
+export interface SnapshotForm extends SnapshotProperties{
+    photo: File | null;
+}
+
+export interface SnapshotInfo extends SnapshotProperties{
+    photo: string;
+}
+
+export const dataSubmission = async (info : SnapshotForm) => {
 
     if(!info.photo)
     {

@@ -49,7 +49,7 @@ const Locations = () => {
                     {
                         imgs.map((pic) => (
                             <div id="stitch" style={{left: (-25 * renderI).toString() + "%"}}>
-                                <img src={pic.photo as string} className='panoImg' style={{left: (-100 * renderI++).toString() + "%"}}></img>
+                                <img src={pic.photo} className='panoImg' style={{left: (-100 * renderI++).toString() + "%"}}></img>
                             </div>
                         ))
                     }
