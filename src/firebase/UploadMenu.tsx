@@ -1,6 +1,6 @@
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import {dataSubmission} from  "./FirebaseManager";
-
+import './UploadMenu.css';
 
 export interface FormData {
     direction: string;
@@ -60,8 +60,8 @@ const UploadMenu = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className='submit-form'>
+            <label className='upload-box'>
                 Location:
                 <input
                     type="text"
@@ -82,7 +82,7 @@ const UploadMenu = () => {
                 />
             </div>
             <br/>
-            <label>
+            <label className='upload-box'>
                 Lat:
                 <input
                     type="number"
@@ -93,7 +93,7 @@ const UploadMenu = () => {
                 />
             </label>
             <br/>
-            <label>
+            <label className='upload-box'>
                 Long:
                 <input
                     type="number"
@@ -104,7 +104,7 @@ const UploadMenu = () => {
                 />
             </label>
             <br/>
-            <label>
+            <label className='upload-box'>
                 Season:
             </label>
             <select id="seasonSelect" name="season" value={formData.season} onChange={handleChange}>
@@ -114,7 +114,7 @@ const UploadMenu = () => {
                 <option value={Seasons.Winter}>{Seasons.Winter}</option>
             </select>
             <br/>
-            <label>
+            <label className='upload-box'>
                 Time:
             </label>
             <select id="timeSelect" name="time" value={formData.time} onChange={handleChange}>

@@ -12,11 +12,10 @@ const ViewButton= () => {
 
     const [receivedData, setReceivedData] = useState<string>(' ');
     
-    
 
     return (
     <div>
-        <button className="viewButton"> Submit </button>
+        <button className="viewButton" > Submit </button>
     </div>
     )
 };
