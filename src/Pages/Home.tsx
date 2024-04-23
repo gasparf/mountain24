@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import './Home.css'
 import L from 'leaflet'
 import { MapContainer, TileLayer, ZoomControl} from 'react-leaflet'
@@ -10,7 +11,9 @@ import NavMenu from '../Components/NavMenu/NavMenu'
 import PopUpCard from '../Components/PopUp'
 
 
+
 // import marker data from firebase storage -> may need to pull from image storage data? 
+
 
 
 const Home = () => {
@@ -22,6 +25,7 @@ const Home = () => {
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     })
+
     return (
         <div className='Home'>
 
@@ -39,9 +43,9 @@ const Home = () => {
 
                     <Marker position={[49.2787246, -122.9181736]} icon={customIcon}>
                         <Popup>
-                            <div className="popup"> 
-                                <PopUpCard />
-                            </div>
+                            <> 
+                              <PopUpCard/>
+                            </>
                         </Popup>
                     </Marker>
 
